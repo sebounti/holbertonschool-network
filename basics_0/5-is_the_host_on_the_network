@@ -1,10 +1,20 @@
-#!/usr/bin/env bash
-# Bash script that that pings an IP address passed as an argument.
+#!/bin/bash
+
+# Check if no argument is passed
 if [ $# -eq 0 ]; then
     echo "Usage: $(basename "$0") {IP_ADDRESS}"
-    exit $1
+    exit 1
 fi
 
+# Get the IP address argument
 ip_address=$1
 
-ping -c 5 -i 1 "$ip_address"
+# Ping the IP address 5 times
+for (( i=1; i<=5; i++ )); do
+    ping -c 1 "$ip_address" >/dev/null
+    if [ $? -eq 0 ]; then
+        echo "Ping successful to $ip_address"
+    else
+        echo "Ping failed to $ip_address"
+    fi
+done
