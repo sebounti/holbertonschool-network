@@ -1,20 +1,8 @@
 #!/bin/bash
-
 # Check if no argument is passed
-if [ $# -eq 0 ]; then
-    echo "Usage: $(basename "$0") {IP_ADDRESS}"
-    exit 1
+if [ $# -eq 0 ]
+	then
+    	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+   		exit 1
 fi
-
-# Get the IP address argument
-ip_address=$1
-
-# Ping the IP address 5 times
-for (( i=1; i<=5; i++ )); do
-    ping -c 1 "$ip_address" >/dev/null
-    if [ $? -eq 0 ]; then
-        echo "Ping successful to $ip_address"
-    else
-        echo "Ping failed to $ip_address"
-    fi
-done
+ping "$1" -c 5
